@@ -1,3 +1,9 @@
 .vscode/
 venv/
 build/
+
+# Generated protobuf files
+*_pb2.py
+*_pb2_grpc.py
+python/src/__pycache__/basecamp_pb2_grpc.cpython-314.pyc
+python/src/__pycache__/basecamp_pb2.cpython-314.pyc
