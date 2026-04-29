@@ -9,7 +9,7 @@
 
 #include "basecamp.grpc.pb.h"
 #include "../common/config.h"
-#include "../client/node_stub.h"
+#include "../transport/node_stub.h"
 
 class NodeServiceImpl final : public basecamp::NodeService::Service {
 public:
