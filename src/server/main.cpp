@@ -5,7 +5,7 @@
 #include <grpcpp/grpcpp.h>
 
 #include "../common/config.h"
-#include "../dataset/PartitionLoader.hpp"
+// #include "../dataset/PartitionLoader.hpp"
 #include "../dataset/PartitionStore.hpp"
 #include "../model/OverlayConfig.hpp"
 #include "../query/LocalQueryEngine.hpp"
