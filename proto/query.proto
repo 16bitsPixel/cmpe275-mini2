@@ -3,12 +3,10 @@ syntax = "proto3";
 package mini2.query;
 
 service QueryService {
-  // client -> entry node (A)
   rpc SubmitQuery(SubmitQueryRequest) returns (SubmitQueryReply) {}
   rpc FetchChunk(FetchChunkRequest) returns (FetchChunkReply) {}
   rpc CancelQuery(CancelQueryRequest) returns (CancelQueryReply) {}
 
-  // node -> node
   rpc SubmitSubQuery(SubmitSubQueryRequest) returns (SubmitSubQueryReply) {}
   rpc FetchSubChunk(FetchSubChunkRequest) returns (FetchSubChunkReply) {}
   rpc CancelSubQuery(CancelSubQueryRequest) returns (CancelSubQueryReply) {}
@@ -30,23 +28,12 @@ message FloatRange {
 }
 
 message QueryFilter {
-  bool has_pickup_range = 1;
-  Int64Range pickup_range = 2;
-
-  bool has_dropoff_range = 3;
-  Int64Range dropoff_range = 4;
-
-  bool has_distance_range = 5;
-  FloatRange distance_range = 6;
-
-  bool has_total_cents_range = 7;
-  Int32Range total_cents_range = 8;
-
-  bool has_tip_cents_range = 9;
-  Int32Range tip_cents_range = 10;
-
-  bool has_payment_type = 11;
-  int32 payment_type = 12;
+  Int64Range pickup_range = 1;
+  Int64Range dropoff_range = 2;
+  FloatRange distance_range = 3;
+  Int32Range total_cents_range = 4;
+  Int32Range tip_cents_range = 5;
+  optional int32 payment_type = 6;
 }
 
 message SubmitQueryRequest {
@@ -70,6 +57,7 @@ message FetchChunkRequest {
 message TripRow {
   uint32 row_id = 1;
   string source_node_id = 2;
+
   int32 vendor_id = 3;
   int64 pickup_datetime = 4;
   int64 dropoff_datetime = 5;

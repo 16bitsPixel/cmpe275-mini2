@@ -31,37 +31,31 @@ mini2::query::QueryFilter toProtoFilter(const QueryRequest& in) {
     mini2::query::QueryFilter out;
 
     if (in.pickupRange) {
-        out.set_has_pickup_range(true);
         out.mutable_pickup_range()->set_lo(in.pickupRange->lo);
         out.mutable_pickup_range()->set_hi(in.pickupRange->hi);
     }
 
     if (in.dropoffRange) {
-        out.set_has_dropoff_range(true);
         out.mutable_dropoff_range()->set_lo(in.dropoffRange->lo);
         out.mutable_dropoff_range()->set_hi(in.dropoffRange->hi);
     }
 
     if (in.distanceRange) {
-        out.set_has_distance_range(true);
         out.mutable_distance_range()->set_lo(in.distanceRange->lo);
         out.mutable_distance_range()->set_hi(in.distanceRange->hi);
     }
 
     if (in.totalCentsRange) {
-        out.set_has_total_cents_range(true);
         out.mutable_total_cents_range()->set_lo(in.totalCentsRange->lo);
         out.mutable_total_cents_range()->set_hi(in.totalCentsRange->hi);
     }
 
     if (in.tipCentsRange) {
-        out.set_has_tip_cents_range(true);
         out.mutable_tip_cents_range()->set_lo(in.tipCentsRange->lo);
         out.mutable_tip_cents_range()->set_hi(in.tipCentsRange->hi);
     }
 
     if (in.paymentType) {
-        out.set_has_payment_type(true);
         out.set_payment_type(*in.paymentType);
     }
 
