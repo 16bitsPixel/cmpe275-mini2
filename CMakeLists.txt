@@ -13,13 +13,8 @@ set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
 set(_GRPC_GRPCPP gRPC::grpc++)
 set(_REFLECTION gRPC::grpc++_reflection)
 
-if(CMAKE_CROSSCOMPILING)
-    find_program(_PROTOBUF_PROTOC protoc REQUIRED)
-    find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin REQUIRED)
-else()
-    set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
-    set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
-endif()
+find_program(_PROTOBUF_PROTOC protoc REQUIRED)
+find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin REQUIRED)
 
 set(GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 file(MAKE_DIRECTORY "${GENERATED_DIR}")
@@ -47,7 +42,7 @@ function(add_grpc_proto_library TARGET_NAME PROTO_FILE)
             --grpc_out "${GENERATED_DIR}"
             --cpp_out "${GENERATED_DIR}"
             -I "${PROTO_DIR}"
-            --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+            --plugin=protoc-gen-grpc=${_GRPC_CPP_PLUGIN_EXECUTABLE}
             "${PROTO_ABS}"
         DEPENDS "${PROTO_ABS}"
         VERBATIM
@@ -96,7 +91,7 @@ set(PROJECT_INCLUDE_DIRS
 add_executable(node_server
     src/common/config.cc
     src/model/OverlayConfig.cpp
-    src/client/node_stub.cc
+    src/transport/node_stub.cc
     src/transport/QueryProtoConverters.cpp
     src/transport/GrpcRemoteQueryClient.cpp
     src/query/LocalQueryEngine.cpp
@@ -126,7 +121,7 @@ target_link_libraries(node_server
 # ---------------------------------------------------------
 
 add_executable(basecamp_client
-    src/client/node_stub.cc
+    src/transport/node_stub.cc
     src/client/basecamp_client.cc
 )
 
@@ -166,3 +161,5 @@ target_link_libraries(query_client
         ${_PROTOBUF_LIBPROTOBUF}
         Threads::Threads
 )
+
+message(STATUS "gRPC plugin: ${_GRPC_CPP_PLUGIN_EXECUTABLE}")
