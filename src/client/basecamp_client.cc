@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "node_stub.h"
+#include "../transport/node_stub.h"
 
 static void printUsage(const char* prog) {
     std::cerr << "Usage:\n"

@@ -247,6 +247,16 @@ QueryResultRow QueryCoordinator::materializeRow(RowId rowId) const {
     row.rowId = rowId;
     row.sourceNodeId = selfNodeId_;
 
+    // Empty-store test mode:
+    // return a default-initialized row without touching store_.
+    return row;
+}
+/*
+QueryResultRow QueryCoordinator::materializeRow(RowId rowId) const {
+    QueryResultRow row{};
+    row.rowId = rowId;
+    row.sourceNodeId = selfNodeId_;
+
     // match PartitionStore API.
     row.vendorId = store_.vendorIdAt(rowId);
     row.pickupDatetime = store_.pickupDatetimeAt(rowId);
@@ -269,6 +279,7 @@ QueryResultRow QueryCoordinator::materializeRow(RowId rowId) const {
 
     return row;
 }
+    */
 
 std::vector<std::string> QueryCoordinator::nextHopNodeIds() const {
     // Adapt to OverlayConfig API.

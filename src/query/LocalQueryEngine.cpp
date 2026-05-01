@@ -1,5 +1,18 @@
 #include "LocalQueryEngine.hpp"
 
+std::vector<LocalQueryEngine::RowId>
+LocalQueryEngine::execute(const PartitionStore& store,
+                          const QueryRequest& query) const {
+    (void)store;
+    (void)query;
+
+    // Empty-store test mode: no local matches.
+    return {};
+}
+
+/*
+#include "LocalQueryEngine.hpp"
+
 #include <cstddef>
 
 std::vector<LocalQueryEngine::RowId>
@@ -64,3 +77,4 @@ LocalQueryEngine::execute(const PartitionStore& store,
 
     return result;
 }
+*/

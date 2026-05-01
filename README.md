@@ -22,6 +22,13 @@ cmake ..
 make
 ```
 
+```sh
+cmake -B build -S . \
+  -DCMAKE_CXX_COMPILER=clang++ \
+  -DCMAKE_C_COMPILER=clang
+cmake --build build
+```
+
 ### Start server
 ex: A.conf
 ```

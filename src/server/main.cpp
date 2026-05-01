@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
         );
 
         // Services
-        BasecampServiceImpl basecampService(cfg);
+        NodeServiceImpl basecampService(cfg);
         if (!basecampService.setup()) {
             std::cerr << "Basecamp service setup failed\n";
             return 2;
